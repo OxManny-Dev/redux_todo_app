@@ -10,6 +10,6 @@ app.use(express.json());
 
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI  || 'mongodb://localhost/redux_todo_db', {  useNewUrlParser: true, useUnifiedTopology: true  });
+mongoose.connect(process.env.MONGODB_URI  || 'mongodb://localhost/redux_todo_db', {  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true  });
 
 app.listen(PORT);
