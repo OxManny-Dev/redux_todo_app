@@ -7,6 +7,9 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(routes);
+
 mongoose.connect(process.env.MONGODB_URI  || 'mongodb://localhost/redux_todo_db', {  useNewUrlParser: true, useUnifiedTopology: true  });
 
 app.listen(PORT);
