@@ -25,7 +25,6 @@ const jwtLogin = new JwtStrategy(jwtOptions, async (payload, done) => {
   }
 });
 
-
 // Let's passport know that we have declared a 'jwt' strategy.
 // If we call passport.authenticate('jwt')   passpoort will refer
 // to this jwtLogin strategy that we defined
