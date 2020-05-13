@@ -13,6 +13,7 @@ const jwtOptions = {
 // Create jwt strategy for handling JWT
 // This strategy is for authenticating users on each request
 const jwtLogin = new JwtStrategy(jwtOptions, async (payload, done) => {
+  console.log(payload);
   // payload === { sub: user._id, iat: timeStamp }
   try {
     const user = await User.findById(payload.sub);

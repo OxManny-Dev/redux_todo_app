@@ -18,6 +18,7 @@ module.exports = {
     }
   },
   getAllUserEmails: async (req, res) => {
+    console.log(req.user);
     try {
       const users = await User.find({}, 'email');
       if (!users) {
