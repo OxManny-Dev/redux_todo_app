@@ -39,23 +39,23 @@ module.exports = {
     } catch (e) {
       return res.status(403).json(e);
     }
+  },
+  deleteUserTodoById: async (req, res) => {
+    const { todoId } = req.params;
+    console.log(req.user);
+    try {
+      const todoToDelete = await Todo.findById(todoId);
+      if (!todoToDelete) {
+        return res.status(401).json({ error: 'No todo with that id' });
+      }
+      // This check is to see if the todo does not belong to the logged in User
+      if (req.user._id.toString() !== todoToDelete.user.toString()) {
+        return res.status(401).json({ error: 'You cannot delete a todo that is not yours' });
+      }
+      const deletedTodo = await Todo.findByIdAndDelete(todoId);
+      return res.status(200).json(deletedTodo);
+    } catch (e) {
+      return res.status(403).json(e);
+    }
   }
 };
-
-
-//  Inside of userRoutes. We want to create a route for getting all of a Users todos
-//  Get request should go to /api/user/todos
-//  Make sure that this route is protected by the requireAuth middleware
-//  Remember  console.log(req.user)
-
-// Inside of the userController
-// Add a method called getUserTodos
-
-// This method should fetch all of the current logged in users todos
-// No need to check if there are no todos
-// It should respond in json all of the current logged in users todos with a status of a 200
-// in the catch block, just use return res.status(403).json(e);
-
-//  U can fetch all of the User's todos using The User queries or using the Todo queries
-//   Using the User model requires a bit more work. You need to use populate
-// If you use the Todo model, there is no need for populate.
