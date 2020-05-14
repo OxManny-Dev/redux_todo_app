@@ -29,8 +29,18 @@ module.exports = {
       return res.status(403).json(e);
     }
   },
+  getUserTodos: async (req, res) => {
+    console.log(req.user);
+    try {
+      // const user = await User.findById(req.user._id).populate('todos');
+      // return res.status(200).json(user.todos);
+      const todos = await Todo.find({ user: req.user._id });
+      return res.status(200).json(todos);
+    } catch (e) {
+      return res.status(403).json(e);
+    }
+  }
 };
-
 
 
 //  Inside of userRoutes. We want to create a route for getting all of a Users todos
